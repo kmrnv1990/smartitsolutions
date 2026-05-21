@@ -1,117 +1,77 @@
 import React, { useState } from "react";
 import {
-  ArrowRight, CheckCircle2, Cloud, Database, Headphones, Laptop, Mail,
-  MapPin, Menu, MessageCircle, Phone, Printer, Server, ShieldCheck,
-  Wifi, X, Zap, Cpu
+  ArrowRight,
+  CheckCircle2,
+  Cloud,
+  Cpu,
+  Database,
+  Headphones,
+  Laptop,
+  Mail,
+  Menu,
+  MessageCircle,
+  Phone,
+  Printer,
+  Server,
+  ShieldCheck,
+  Wifi,
+  X,
 } from "lucide-react";
 
-const phone = "0416728611";
+const phoneDisplay = "+61 416 728 611";
+const phoneLink = "+61416728611";
 const email = "sales@smartitsolutions.com.au";
-const cleanPhone = phone.replace(/^0/, "");
-const whatsappUrl = `https://wa.me/61${cleanPhone}?text=${encodeURIComponent(
-  "Hi Smart I.T Solutions, I would like to enquire about your IT services."
-)}`;
+const whatsappUrl = "https://wa.me/61416728611?text=Hi%20Smart%20I.T%20Solutions%2C%20I%20would%20like%20to%20enquire%20about%20your%20IT%20services.";
 
 const services = [
   {
     icon: Headphones,
     title: "Managed IT Support",
-    badge: "Core",
-    desc: "Ongoing IT support for small businesses, remote workers and teams that need reliable technology without hiring full-time IT staff.",
-    points: ["Remote support", "Onsite assistance", "Business IT guidance"],
+    desc: "Responsive remote and onsite IT support for homes, remote workers and small businesses that need reliable technology without unnecessary complexity.",
   },
   {
     icon: Laptop,
     title: "Laptop & Desktop Repairs",
-    badge: "Repairs",
-    desc: "Professional troubleshooting, repairs and upgrades for laptops, desktops and business computers.",
-    points: ["Laptop repairs", "Desktop troubleshooting", "SSD & RAM upgrades"],
+    desc: "Professional troubleshooting, repairs, tune-ups and upgrades for laptops, desktops and business computers.",
   },
   {
     icon: Cpu,
     title: "Hardware Procurement & Leasing",
-    badge: "Business IT",
-    desc: "Hardware supply, device leasing and workstation setup for businesses needing reliable equipment.",
-    points: ["Device leasing", "Hardware supply", "Workstation setup"],
+    desc: "Device supply, workstation setup, replacement equipment and leasing options for business laptops, desktops and office technology.",
   },
   {
     icon: Cloud,
     title: "Microsoft 365 & Cloud",
-    badge: "Cloud",
-    desc: "Microsoft 365, Outlook, Teams, email setup, licensing and cloud productivity support.",
-    points: ["Microsoft 365", "Business email", "Teams & Outlook"],
+    desc: "Microsoft 365 licensing, Outlook, Teams, business email setup and cloud productivity support for growing teams.",
   },
   {
     icon: Server,
     title: "VoIP Phone Services",
-    badge: "Phones",
-    desc: "Business VoIP setup, handset configuration, call flow support and phone system assistance.",
-    points: ["VoIP setup", "Handset support", "Call routing"],
+    desc: "Business VoIP setup, handset configuration, call flow support and modern communication solutions.",
   },
   {
     icon: Wifi,
     title: "Internet & Networking",
-    badge: "Network",
-    desc: "Wi-Fi, router, modem, printer and small office network troubleshooting and setup.",
-    points: ["Wi-Fi support", "Router setup", "Internet troubleshooting"],
+    desc: "Wi-Fi, router, modem, internet, printer and small office network troubleshooting and setup.",
   },
   {
     icon: ShieldCheck,
     title: "Security & Antivirus",
-    badge: "Security",
-    desc: "Antivirus setup, virus removal, spyware protection and practical cybersecurity guidance.",
-    points: ["Antivirus", "Virus removal", "Security advice"],
+    desc: "Antivirus setup, virus removal, spyware protection and practical cybersecurity guidance for devices and users.",
   },
   {
     icon: Database,
     title: "Backup & Data Protection",
-    badge: "Backup",
-    desc: "Backup planning, data protection, storage setup and recovery guidance for important files.",
-    points: ["Backup setup", "Data safety", "Recovery guidance"],
+    desc: "Backup planning, data protection, storage setup and recovery guidance to help protect important business and personal files.",
   },
   {
     icon: Printer,
     title: "Printers & Devices",
-    badge: "Devices",
-    desc: "Printer, scanner and connected device setup, configuration and troubleshooting.",
-    points: ["Printer setup", "Scanner support", "Device configuration"],
+    desc: "Printer, scanner and connected device setup, configuration and troubleshooting for home and office environments.",
   },
 ];
 
-const industries = [
-  "Small Businesses",
-  "Retail Stores",
-  "Restaurants",
-  "Professional Offices",
-  "Home Offices",
-  "Remote Workers",
-];
-
 const navLinks = ["Home", "About", "Services", "Contact"];
-
-function ServiceCard({ service }) {
-  const Icon = service.icon;
-
-  return (
-    <article className="serviceCard">
-      <div className="serviceTop">
-        <span className="iconBubble"><Icon /></span>
-        <span className="badge">{service.badge}</span>
-      </div>
-
-      <div className="serviceBody">
-        <h3>{service.title}</h3>
-        <p>{service.desc}</p>
-      </div>
-
-      <ul>
-        {service.points.map((point) => (
-          <li key={point}><CheckCircle2 size={16} /> {point}</li>
-        ))}
-      </ul>
-    </article>
-  );
-}
 
 function Nav({ page, setPage }) {
   const [open, setOpen] = useState(false);
@@ -123,140 +83,211 @@ function Nav({ page, setPage }) {
   }
 
   return (
-    <header className="header">
-      <div className="wrap nav">
-        <button className="brand" onClick={() => goTo("Home")}>
+    <header className="siteHeader">
+      <div className="wrap navWrap">
+        <button className="brand" onClick={() => goTo("Home")} type="button">
           <img src="/Logo.jpg" alt="Smart I.T Solutions" />
-          <div>
-            <strong>Smart I.T Solutions</strong>
-            <span>Managed IT • VoIP • Security</span>
-          </div>
+          <span>Smart I.T Solutions</span>
         </button>
 
         <nav className={open ? "navLinks open" : "navLinks"}>
           {navLinks.map((item) => (
-            <button key={item} onClick={() => goTo(item)} className={page === item ? "active" : ""}>
+            <button
+              key={item}
+              type="button"
+              className={page === item ? "active" : ""}
+              onClick={() => goTo(item)}
+            >
               {item}
             </button>
           ))}
         </nav>
 
-        <div className="navActions">
-          <a className="ghostCall" href={`tel:+61${cleanPhone}`}><Phone size={16} /> Call</a>
-          <a className="navCta" href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp</a>
-          <button className="menuBtn" onClick={() => setOpen(!open)}>
-            {open ? <X /> : <Menu />}
-          </button>
-        </div>
+        <button className="menuBtn" type="button" onClick={() => setOpen(!open)}>
+          {open ? <X /> : <Menu />}
+        </button>
       </div>
     </header>
+  );
+}
+
+function HeroIllustration() {
+  return (
+    <div className="heroIllustration">
+      <div className="itDashboard">
+        <div className="dashHeader">
+          <span className="windowDot red" />
+          <span className="windowDot yellow" />
+          <span className="windowDot green" />
+          <strong>IT Operations</strong>
+        </div>
+
+        <div className="dashGrid">
+          <div className="dashCard mainMetric">
+            <small>Support Status</small>
+            <strong>Online</strong>
+            <div className="progress"><span /></div>
+          </div>
+          <div className="dashCard"><ShieldCheck /><span>Security</span></div>
+          <div className="dashCard"><Cloud /><span>Cloud</span></div>
+          <div className="dashCard"><Server /><span>VoIP</span></div>
+          <div className="dashCard"><Wifi /><span>Network</span></div>
+        </div>
+
+        <div className="dashRows">
+          <p><CheckCircle2 /> Devices monitored and supported</p>
+          <p><CheckCircle2 /> Microsoft 365 and email ready</p>
+          <p><CheckCircle2 /> Backup, security and remote support aligned</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AboutVisual() {
+  return (
+    <div className="aboutVisual imageVisual">
+      <img src="/global-it-section.png" alt="Global IT support, cloud, security and managed services" />
+    </div>
+  );
+}
+
+function ContactVisual() {
+  return (
+    <div className="contactVisual">
+      <div className="contactFlowCard">
+        <h3>Fast enquiry flow</h3>
+        <p><span>1</span> Submit your enquiry</p>
+        <p><span>2</span> We review your requirement</p>
+        <p><span>3</span> We recommend the right support path</p>
+      </div>
+    </div>
+  );
+}
+
+function ServiceCard({ service }) {
+  const Icon = service.icon;
+  return (
+    <article className="serviceCard">
+      <div className="serviceIcon"><Icon /></div>
+      <h3>{service.title}</h3>
+      <p>{service.desc}</p>
+    </article>
   );
 }
 
 function Home({ setPage }) {
   return (
     <>
-      <section className="hero">
+      <section className="heroSection animatedBg">
         <div className="wrap heroGrid">
-          <div>
-            <div className="pill"><Zap size={16} /> Responsive IT support for modern businesses</div>
-            <h1>Managed IT services that keep your business moving.</h1>
-            <p className="lead">
-              Smart I.T Solutions supports homes and businesses with managed IT support,
-              laptop and desktop repair, VoIP phone services, Microsoft 365, internet,
-              cybersecurity, antivirus, backups and hardware solutions.
+          <div className="heroCopy revealUp">
+            <p className="kicker">Reliable IT Infrastructure & Support</p>
+            <h1>We deliver <span className="accent">modern IT solutions</span> for homes and growing teams.</h1>
+            <p className="heroText">
+              Smart I.T Solutions provides onsite and remote IT services to keep your computers,
+              networks, cloud tools, phones and security responsive, reliable and ready for growth.
             </p>
-
-            <div className="actions">
-              <a className="primary" href={`tel:+61${cleanPhone}`}><Phone size={18} /> Call 0416 728 611</a>
-              <a className="secondary" href={whatsappUrl} target="_blank" rel="noreferrer">
-                <MessageCircle size={18} /> WhatsApp Enquiry
-              </a>
+            <div className="heroActions">
+              <button className="primaryBtn" onClick={() => setPage("Contact")} type="button">
+                Get a Quote <ArrowRight size={18} />
+              </button>
+              <button className="outlineBtn" onClick={() => setPage("Services")} type="button">
+                Explore Services
+              </button>
             </div>
-
-            <div className="trustStrip">
-              <div><strong>IT</strong><span>Support made simple</span></div>
-              <div><strong>AU</strong><span>Australia-wide support</span></div>
-              <div><strong>365</strong><span>Microsoft cloud support</span></div>
-            </div>
-          </div>
-
-          <div className="heroPanel">
-            <div className="panelHeader">
-              <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
-              <small>Smart Support Console</small>
-            </div>
-
-            <div className="logoStage">
-              <img src="/Logo.jpg" alt="Smart I.T Solutions Logo" />
-            </div>
-
-            <div className="statusList">
-              <p><CheckCircle2 /> Computer repair and upgrades</p>
-              <p><CheckCircle2 /> Microsoft 365 and cloud support</p>
-              <p><CheckCircle2 /> VoIP, internet and networking</p>
-              <p><CheckCircle2 /> Security, antivirus and backup</p>
+            <div className="trustLine">
+              <span>SLA-minded support</span>
+              <span>Remote readiness</span>
+              <span>Global-style support</span>
             </div>
           </div>
+          <HeroIllustration />
         </div>
       </section>
 
-      <section className="wrap section">
-        <div className="sectionHead">
-          <p className="eyebrow dark">What We Do</p>
-          <h2>Complete IT solutions under one roof.</h2>
+      <section className="wrap sectionBlock revealUp">
+        <div className="sectionIntro">
+          <h2>Core Services</h2>
           <p>
-            From computer repairs to managed IT, Microsoft 365, VoIP, security,
-            device leasing and hardware procurement, we help you keep technology reliable.
+            End-to-end IT support, repairs, procurement, cloud, networking and managed services
+            designed to keep your systems reliable and your users productive.
           </p>
         </div>
-
-        <div className="serviceGrid">
-          {services.slice(0, 6).map((service) => (
-            <ServiceCard key={service.title} service={service} />
-          ))}
+        <div className="serviceGrid coreGrid">
+          {services.slice(0, 6).map((service) => <ServiceCard key={service.title} service={service} />)}
         </div>
       </section>
 
-      <section className="darkBand">
-        <div className="wrap split">
+      <section className="whySection revealUp">
+        <div className="wrap whyGrid">
           <div>
-            <p className="eyebrow">Why Smart I.T Solutions?</p>
-            <h2>Less downtime. Clearer support. Better technology decisions.</h2>
+            <h2>Why choose Smart I.T Solutions?</h2>
             <p>
-              We help users and businesses stay productive by fixing issues quickly,
-              improving connectivity, securing devices and making IT easier to manage.
+              Your day depends on working technology. We focus on fast response, clear communication
+              and dependable execution so you can stay focused on what matters most.
             </p>
+            <div className="checkRow">
+              <span><CheckCircle2 /> High-touch communication</span>
+              <span><CheckCircle2 /> Committed to quality</span>
+              <span><CheckCircle2 /> Fast response focus</span>
+            </div>
           </div>
-
-          <div className="ticks">
-            <p><CheckCircle2 /> Responsive remote and onsite support</p>
-            <p><CheckCircle2 /> Microsoft 365, VoIP and device assistance</p>
-            <p><CheckCircle2 /> Cybersecurity and antivirus guidance</p>
-            <p><CheckCircle2 /> Simple communication without jargon</p>
+          <div className="statsCard">
+            <h3>Business-ready support</h3>
+            <p>
+              From computer repairs and device upgrades to Microsoft 365, VoIP, networking,
+              security and hardware leasing, we provide practical IT support with a global-service mindset from one place.
+            </p>
+            <div className="statsGrid">
+              <div><strong>GLOBAL</strong><span>Support mindset</span></div>
+              <div><strong>365</strong><span>Cloud support</span></div>
+              <div><strong>IT</strong><span>Managed help</span></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="wrap section">
-        <div className="sectionHead">
-          <p className="eyebrow dark">Who We Help</p>
-          <h2>Support for busy people and growing businesses.</h2>
-        </div>
-
-        <div className="industryGrid">
-          {industries.map((item) => <span key={item}>{item}</span>)}
+      <section className="globalPresence revealUp">
+        <div className="wrap presenceLayout">
+          <div className="presenceCopy">
+            <span className="presencePill">Australia-wide presence</span>
+            <h2>Supporting Australians across the country</h2>
+            <p>
+              Smart I.T Solutions is headquartered in Australia and built with a global-service mindset — supporting customers through remote-first IT support, cloud services, VoIP, cybersecurity, networking and managed IT solutions.
+            </p>
+            <div className="presenceFeatures">
+              <div><strong>Australia HQ</strong><span>Based in Australia</span></div>
+              <div><strong>Nationwide Support</strong><span>Remote and onsite assistance</span></div>
+              <div><strong>Managed IT Services</strong><span>Cloud • VoIP • Security</span></div>
+            </div>
+          </div>
+          <div className="presenceImageCard">
+            <img src="/australia-presence-modern.png" alt="Australia-wide Smart I.T Solutions support presence" />
+          </div>
         </div>
       </section>
 
-      <section className="wrap ctaSection">
-        <div className="ctaBox">
-          <div>
-            <p className="eyebrow">Need IT help today?</p>
-            <h2>Tell us what is not working. We will help you find the right fix.</h2>
+      <section className="wrap workspaceSection revealUp">
+        <div className="workspaceImage">
+          <div className="deviceFrame">
+            <div className="deviceHeader" />
+            <div className="deviceBody">
+              <Laptop />
+              <Wifi />
+              <Cloud />
+              <ShieldCheck />
+            </div>
           </div>
-          <button className="primary light" onClick={() => setPage("Contact")}>
-            Contact Us <ArrowRight size={18} />
+        </div>
+        <div className="workspaceCopy">
+          <h2>Workspace Infrastructure</h2>
+          <p>
+            We help you design and support a digital workspace that lets users work confidently
+            from the right devices, with fast access to email, apps, files, printers, phones and collaboration tools.
+          </p>
+          <button className="primaryBtn" onClick={() => setPage("About")} type="button">
+            Learn About Us <ArrowRight size={18} />
           </button>
         </div>
       </section>
@@ -264,114 +295,69 @@ function Home({ setPage }) {
   );
 }
 
-function About() {
+function About({ setPage }) {
   return (
-    <main className="wrap page aboutPage">
-      <p className="eyebrow dark aboutEyebrow">About Us</p>
+    <>
+      <section className="heroSection aboutHero animatedBg">
+        <div className="wrap heroGrid">
+          <div className="heroCopy revealUp">
+            <p className="kicker">Trusted IT Specialists</p>
+            <h1>About <span className="accent">Smart I.T Solutions</span></h1>
+            <p className="heroText">
+              Smart I.T Solutions is an IT services partner helping homes, professionals and small businesses run secure, resilient and efficient technology operations.
+            </p>
+            <div className="heroActions">
+              <button className="primaryBtn" onClick={() => setPage("Contact")} type="button">Get in Touch</button>
+              <button className="outlineBtn" onClick={() => setPage("Services")} type="button">View Services</button>
+            </div>
+            <div className="trustLine">
+              <span>Enterprise-ready delivery</span>
+              <span>Remote support model</span>
+            </div>
+          </div>
+          <AboutVisual />
+        </div>
+      </section>
 
-      <h1 className="aboutTitle">
-        Trusted IT support for homes, professionals and growing businesses.
-      </h1>
-
-      <div className="aboutLead expanded">
-        <p>
-          Smart I.T Solutions provides practical and dependable technology support
-          designed for everyday users, remote workers and small businesses across Australia.
-        </p>
-        <p>
-          We understand how frustrating technology problems can be when computers slow down,
-          internet drops, emails fail, phones stop working or security becomes a concern.
-          Our goal is to make technology easier to manage, understand and rely on.
-        </p>
-      </div>
-
-      <div className="aboutHighlight">
+      <section className="wrap aboutWorkSection revealUp">
         <div>
-          <h2>We make IT simple, reliable and business-ready.</h2>
+          <h2>What we do</h2>
           <p>
-            Our support is focused on practical outcomes. Whether you need help with a slow
-            laptop, business computers, Microsoft 365, VoIP phones, Wi-Fi issues,
-            cybersecurity or ongoing managed IT support, we work towards solutions that are
-            clear, efficient and dependable.
+            We plan, support and operate practical IT environments end-to-end. From home and business device support to Microsoft 365, VoIP phones, internet, networking, security, backups and hardware leasing, we provide reliable service quality across devices, users and locations.
           </p>
+          <div className="pillGrid">
+            <span>Managed IT support</span>
+            <span>Laptop & desktop repairs</span>
+            <span>Microsoft 365 services</span>
+            <span>VoIP & networking</span>
+            <span>Security & antivirus</span>
+            <span>Hardware procurement</span>
+          </div>
         </div>
+        <div className="workflowCard">
+          <h3>How we support you</h3>
+          <div className="workflowStep"><span>01</span><p>Understand your device, network or business IT issue.</p></div>
+          <div className="workflowStep"><span>02</span><p>Explain the best practical options in plain English.</p></div>
+          <div className="workflowStep"><span>03</span><p>Repair, configure, secure or support your technology.</p></div>
+        </div>
+      </section>
 
-        <div className="highlightList">
-          <p><CheckCircle2 /> Clear advice before unnecessary spending</p>
-          <p><CheckCircle2 /> Remote and onsite support available</p>
-          <p><CheckCircle2 /> Laptop, desktop and business computer repair</p>
-          <p><CheckCircle2 /> Hardware procurement and device leasing</p>
-          <p><CheckCircle2 /> Cloud, VoIP, security and backup support</p>
-        </div>
-      </div>
-
-      <div className="aboutGrid detailed">
-        <div className="infoBox large">
-          <h3>What we manage</h3>
-          <p>
-            We support the essential technology that keeps homes and businesses running smoothly.
-            This includes laptops, desktops, business computers, Microsoft 365, Outlook, Teams,
-            business email, VoIP phones, internet connections, Wi-Fi, routers, printers,
-            scanners, backups, antivirus and everyday cybersecurity.
-          </p>
-          <p>
-            We also assist with hardware procurement, device leasing, workstation setup,
-            replacement systems and practical technology recommendations based on business
-            needs and budgets.
-          </p>
-          <p>
-            Whether you are a home user needing simple support or a business looking for
-            ongoing IT assistance, Smart I.T Solutions focuses on responsive service, clear
-            communication and reliable technology outcomes.
-          </p>
-        </div>
-
-        <div className="infoBox">
-          <h3>Our Mission</h3>
-          <p>
-            To provide reliable and professional IT support that makes technology easier,
-            safer and more productive for every customer.
-          </p>
-        </div>
-
-        <div className="infoBox">
-          <h3>Our Approach</h3>
-          <p>
-            We listen first, understand the issue properly and recommend the most practical
-            solution without unnecessary complexity or confusing language.
-          </p>
-        </div>
-
-        <div className="infoBox">
-          <h3>Who We Support</h3>
-          <p>
-            Home users, remote workers, retail stores, restaurants, professional offices,
-            startups and small businesses requiring dependable technology support.
-          </p>
-        </div>
-
-        <div className="infoBox">
-          <h3>Why Customers Choose Us</h3>
-          <p>
-            Customers value our honest communication, responsive support and practical
-            solutions that help reduce downtime and keep systems running efficiently.
-          </p>
-        </div>
-      </div>
-    </main>
+      <section className="wrap aboutCards revealUp">
+        <div><h3>Our Mission</h3><p>To provide reliable IT support that makes technology easier, safer and more productive.</p></div>
+        <div><h3>Our Approach</h3><p>We listen first, explain clearly and recommend practical solutions without confusing jargon.</p></div>
+        <div><h3>Who We Support</h3><p>Home users, remote workers, retail stores, restaurants, professional offices and small businesses.</p></div>
+      </section>
+    </>
   );
 }
 
 function Services() {
   return (
-    <main className="wrap page">
-      <p className="eyebrow dark">Services</p>
-      <h1>Managed IT services for support, security and growth.</h1>
-      <p className="pageIntro">
-        Choose the service you need today or speak with us about a simple support
-        setup for your home office or business.
+    <main className="wrap pageBlock revealUp">
+      <h1>Services</h1>
+      <p className="pageLead">
+        Choose the service you need today or speak with us about simple ongoing support for your home office or business.
       </p>
-
       <div className="serviceGrid">
         {services.map((service) => <ServiceCard key={service.title} service={service} />)}
       </div>
@@ -381,54 +367,77 @@ function Services() {
 
 function Contact() {
   return (
-    <main className="wrap page contactGrid">
-      <div>
-        <p className="eyebrow dark">Contact Us</p>
-        <h1>Get IT support.</h1>
-        <p className="pageIntro">
-          Fill the form and your enquiry will be sent to our email. You can also
-          call or send a WhatsApp message for a quicker conversation.
-        </p>
-
-        <div className="contactDetails">
-          <p><Phone /> 0416 728 611</p>
-          <p><Mail /> {email}</p>
-          <p><MapPin /> Australia-wide support available</p>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="secondary darkBtn">
-            <MessageCircle size={18} /> Send WhatsApp Enquiry
-          </a>
+    <>
+      <section className="heroSection contactHero animatedBg">
+        <div className="wrap heroGrid">
+          <div className="heroCopy revealUp">
+            <p className="kicker">Let’s Talk IT</p>
+            <h1>Contact <span className="accent">Smart I.T Solutions</span></h1>
+            <p className="heroText">
+              Reach out for computer repair, managed IT support, Microsoft 365, VoIP, networking, hardware or security questions.
+            </p>
+            <div className="heroActions">
+              <a href={`tel:${phoneLink}`} className="outlineBtn"><Phone size={18} /> Call {phoneDisplay}</a>
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="primaryBtn"><MessageCircle size={18} /> WhatsApp</a>
+            </div>
+            <div className="trustLine">
+              <span>Fast response focus</span>
+              <span>Remote support ready</span>
+            </div>
+          </div>
+          <ContactVisual />
         </div>
-      </div>
+      </section>
 
-      <form className="form" action={`https://formsubmit.co/${email}`} method="POST">
-        <input type="hidden" name="_subject" value="New Website Enquiry - Smart I.T Solutions" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_template" value="table" />
+      <main className="wrap pageBlock contactPage revealUp">
+        <div className="contactHeader">
+          <h1>Get a Quote / Contact Us</h1>
+          <p className="pageLead">Tell us about your requirement and we’ll get back to you quickly.</p>
+        </div>
 
-        <label>Name<input name="name" required placeholder="Your name" /></label>
-        <label>Email<input type="email" name="email" required placeholder="you@example.com" /></label>
-        <label>Phone<input name="phone" placeholder="Your phone number" /></label>
+        <div className="quoteLayout">
+          <form className="quoteForm" action={`https://formsubmit.co/${email}`} method="POST">
+            <input type="hidden" name="_subject" value="New Website Enquiry - Smart I.T Solutions" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <div className="formTwo">
+              <input name="name" required placeholder="Full Name" />
+              <input type="email" name="email" required placeholder="Work Email" />
+              <input name="company" placeholder="Company Name" />
+              <input name="phone" placeholder="Phone Number" />
+            </div>
+            <select name="service">
+              <option>Service Interested In</option>
+              <option>Managed IT Support</option>
+              <option>Laptop & Desktop Repairs</option>
+              <option>Hardware Procurement & Leasing</option>
+              <option>VoIP Phone Services</option>
+              <option>Microsoft 365 / Licences</option>
+              <option>Internet / Networking</option>
+              <option>Data Security / Antivirus</option>
+              <option>Backup / Data Protection</option>
+              <option>Other</option>
+            </select>
+            <textarea name="message" rows="6" required placeholder="Project Details" />
+            <button className="primaryBtn full" type="submit">Submit Enquiry</button>
+            <small>First submission may require email verification from FormSubmit.</small>
+          </form>
 
-        <label>Service Required
-          <select name="service">
-            <option>Managed IT Support</option>
-            <option>Laptop & Desktop Repairs</option>
-            <option>Hardware Procurement & Leasing</option>
-            <option>VoIP Phone Services</option>
-            <option>Microsoft 365 / Licences</option>
-            <option>Internet / Networking</option>
-            <option>Data Security / Antivirus</option>
-            <option>Backup / Data Protection</option>
-            <option>Other</option>
-          </select>
-        </label>
-
-        <label>Message<textarea name="message" rows="5" required placeholder="Tell us what you need help with" /></label>
-
-        <button className="primary full" type="submit">Send Enquiry</button>
-        <small>First submission may require email verification from FormSubmit.</small>
-      </form>
-    </main>
+          <div className="contactSideGraphic">
+            <div className="contactProcessBox">
+              <h3>What happens next?</h3>
+              <p><span>1</span> We review your enquiry.</p>
+              <p><span>2</span> We contact you to understand the issue.</p>
+              <p><span>3</span> We recommend the right support path.</p>
+            </div>
+            <div className="miniContactCards">
+              <p><Mail /> {email}</p>
+              <p><Phone /> {phoneDisplay}</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
   );
 }
 
@@ -439,21 +448,19 @@ export default function App() {
     <div>
       <style>{css}</style>
       <Nav page={page} setPage={setPage} />
-
       {page === "Home" && <Home setPage={setPage} />}
-      {page === "About" && <About />}
+      {page === "About" && <About setPage={setPage} />}
       {page === "Services" && <Services />}
       {page === "Contact" && <Contact />}
-
-      <footer>
+      <footer className="footer">
         <div className="wrap footerGrid">
           <div>
-            <strong>Smart I.T Solutions</strong>
+            <h3>Smart I.T Solutions</h3>
             <p>Managed IT • Computer Repair • VoIP • Microsoft 365 • Security</p>
           </div>
           <div>
-            <p>Phone: 0416 728 611</p>
             <p>Email: {email}</p>
+            <p>Phone: {phoneDisplay}</p>
           </div>
         </div>
       </footer>
@@ -462,175 +469,187 @@ export default function App() {
 }
 
 const css = `
-:root{
---navy:#06172d;
---navy2:#0b3159;
---blue:#00a9e8;
---cyan:#7de7ff;
---text:#102a43;
---muted:#52677a;
---bg:#f4f8fc;
---card:#ffffff;
---line:#d9e8f5;
---shadow:0 18px 50px rgba(6,23,45,.12);
-}
-
+:root{--navy:#071f38;--blue:#1d7fe8;--blue2:#16a5df;--light:#eef6ff;--text:#102033;--muted:#5c6d7e;--line:#dce7ef;--card:#ffffff}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
-button,input,select,textarea{font-family:inherit}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#edf6ff;color:var(--text)}
+button,input,textarea,select{font-family:inherit}
 button{cursor:pointer}
-.wrap{max-width:1180px;margin:auto;padding:0 24px}
+.wrap{width:min(100% - 48px,1180px);margin:0 auto;padding:0}
+.siteHeader{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.navWrap{height:102px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.brand{display:flex;align-items:center;gap:14px;background:transparent;border:0;color:var(--navy);font-weight:900;font-size:20px}
+.brand img{width:74px;height:74px;object-fit:contain;border-radius:8px}
+.navLinks{display:flex;align-items:center;gap:36px}
+.navLinks button{background:transparent;border:0;color:#21384f;font-weight:800;font-size:15px;padding:10px 0;border-bottom:3px solid transparent}
+.navLinks button.active,.navLinks button:hover{color:var(--blue);border-bottom-color:var(--blue)}
+.menuBtn{display:none;background:var(--navy);color:white;border:0;border-radius:8px;padding:10px}
 
-.header{background:rgba(6,23,45,.94);position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);box-shadow:0 4px 25px rgba(0,0,0,.18)}
-.nav{height:84px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{display:flex;align-items:center;gap:14px;background:transparent;border:0;color:white;text-align:left;min-width:max-content}
-.brand img{width:58px;height:58px;object-fit:contain;background:white;border-radius:14px;padding:5px}
-.brand strong{font-size:21px}
-.brand span{display:block;color:#a7e8ff;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-top:3px}
-.navLinks{display:flex;gap:8px;align-items:center}
-.navLinks button{background:transparent;border:0;color:#e8f6ff;font-weight:800;font-size:15px;padding:12px 14px;border-radius:999px}
-.navLinks .active,.navLinks button:hover{color:white;background:rgba(125,231,255,.13)}
-.navActions{display:flex;align-items:center;gap:10px}
-.ghostCall{color:white;text-decoration:none;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.18);padding:11px 14px;border-radius:999px;font-weight:800}
-.navCta{background:linear-gradient(135deg,var(--blue),#45d6ff);color:white;text-decoration:none;padding:13px 20px;border-radius:999px;font-weight:900}
-.menuBtn{display:none;background:white;border:0;border-radius:12px;padding:10px;color:var(--navy)}
+.animatedBg{position:relative;overflow:hidden;background:linear-gradient(110deg,#dff2ff 0%,#d7e7ff 55%,#dce7ff 100%);color:var(--text)}
+.animatedBg:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(29,127,232,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(29,127,232,.08) 1px,transparent 1px);background-size:38px 38px;opacity:.55;animation:gridMove 24s linear infinite}
+.animatedBg:after{content:"";position:absolute;left:-4%;right:-4%;bottom:-34px;height:90px;background:#edf6ff;transform:rotate(2deg);transform-origin:left top}
+@keyframes gridMove{from{background-position:0 0}to{background-position:152px 76px}}
 
-.hero{background:linear-gradient(130deg,#06172d 0%,#0b3159 60%,#0079b8 115%);color:white;padding:92px 0 76px}
-.heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
-.pill{display:inline-flex;align-items:center;gap:9px;color:#dff8ff;background:rgba(125,231,255,.12);border:1px solid rgba(125,231,255,.26);padding:10px 14px;border-radius:999px;font-weight:800;font-size:13px}
-.eyebrow{color:var(--cyan);font-weight:900;text-transform:uppercase;letter-spacing:2px;font-size:13px}
-.eyebrow.dark{color:#0077aa}
-.aboutEyebrow{font-size:16px;margin-bottom:18px}
-.hero h1,.page h1{font-size:clamp(38px,5vw,62px);line-height:1.04;margin:18px 0 22px;letter-spacing:-1.4px;color:inherit}
-.page h1{color:var(--navy)}
-.aboutTitle{font-size:clamp(40px,5vw,58px);line-height:1.07;margin-bottom:30px;max-width:1050px}
-.lead{font-size:19px;line-height:1.75;color:#eef9ff;max-width:720px}
-.pageIntro,.aboutLead p{font-size:18px;line-height:1.82;color:#435b70}
-.actions{display:flex;gap:15px;flex-wrap:wrap;margin-top:30px}
-.primary,.secondary{border:0;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:15px 24px;font-weight:900;transition:.2s ease}
-.primary{background:linear-gradient(135deg,var(--blue),#45d6ff);color:white}
-.primary:hover,.secondary:hover{transform:translateY(-2px)}
-.secondary{background:white;color:var(--navy)}
-.primary.light{background:white;color:var(--navy)}
-.primary.full{width:100%}
-.darkBtn{background:var(--navy);color:white;margin-top:15px;width:max-content}
+.heroSection{padding:98px 0 118px}
+.heroSection .wrap{position:relative;z-index:1}
+.heroGrid{position:relative;z-index:1;display:grid;grid-template-columns:1fr .95fr;gap:82px;align-items:center}
+.kicker{display:inline-flex;background:rgba(29,127,232,.1);border:1px solid rgba(29,127,232,.22);color:#154775;border-radius:999px;padding:10px 18px;font-size:14px;font-weight:900;letter-spacing:.02em;margin:0 0 22px}
+h1{font-size:clamp(42px,4.3vw,68px);line-height:1.04;letter-spacing:-1.8px;margin:0 0 24px;color:var(--navy)}
+.heroCopy h1{max-width:670px}
+.accent{color:var(--blue)}
+.heroText{font-size:18px;line-height:1.75;color:#43566a;max-width:650px;margin:0}
+.heroActions{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.primaryBtn,.outlineBtn{border:0;border-radius:999px;padding:15px 24px;font-weight:900;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;transition:.2s ease;position:relative;overflow:hidden}
+.primaryBtn:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform:translateX(-120%);transition:.45s}
+.primaryBtn:hover:after{transform:translateX(120%)}
+.primaryBtn{background:var(--blue);color:white;box-shadow:0 14px 30px rgba(29,127,232,.22)}
+.primaryBtn:hover,.outlineBtn:hover{transform:translateY(-2px)}
+.outlineBtn{background:white;color:var(--blue);border:2px solid var(--blue)}
+.primaryBtn.full{width:100%}
+.trustLine{display:grid;grid-template-columns:repeat(2,max-content);gap:12px 24px;margin-top:28px;color:#43566a;font-weight:700;font-size:14px}
+.trustLine span:before{content:"•";color:var(--blue);margin-right:8px}
 
-.trustStrip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
-.trustStrip div{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px;min-height:86px}
-.trustStrip strong{display:block;font-size:25px;color:white}
-.trustStrip span{display:block;color:#cbefff;font-size:13px;margin-top:4px}
+.heroIllustration{display:flex;justify-content:flex-end}
+.itDashboard{width:min(100%,520px);background:white;border-radius:24px;padding:24px;box-shadow:0 30px 70px rgba(7,31,56,.2);animation:softFloat 5s ease-in-out infinite}
+@keyframes softFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.dashHeader{height:44px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:8px;color:var(--navy)}
+.dashHeader strong{margin-left:auto;font-size:14px}
+.windowDot{width:10px;height:10px;border-radius:50%;display:block}
+.windowDot.red{background:#ff6b6b}.windowDot.yellow{background:#ffd166}.windowDot.green{background:#06d6a0}
+.dashGrid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:14px;margin-top:22px}
+.dashCard{min-height:94px;border-radius:18px;background:linear-gradient(135deg,#eef6ff,#f8fbff);border:1px solid #d9e9f7;padding:16px;display:flex;flex-direction:column;justify-content:center;gap:10px;animation:fadeUp .7s ease both}
+.dashCard svg{color:var(--blue)}
+.dashCard span{font-weight:900;color:var(--navy)}
+.mainMetric{grid-row:span 2;min-height:202px}
+.mainMetric small{color:var(--muted);font-weight:800}
+.mainMetric strong{font-size:36px;color:var(--blue)}
+.progress{height:10px;background:#dbeafe;border-radius:999px;overflow:hidden}
+.progress span{display:block;width:78%;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--blue2));animation:progressMove 2.6s ease-in-out infinite}
+@keyframes progressMove{0%,100%{width:64%}50%{width:88%}}
+.dashRows{display:grid;gap:12px;margin-top:18px}
+.dashRows p{margin:0;background:#f3f9fd;border:1px solid #e1eef7;color:var(--navy);border-radius:14px;padding:13px 14px;font-weight:800;display:flex;align-items:center;gap:10px}
+.dashRows svg{color:var(--blue);flex:none}
 
-.heroPanel{background:white;color:var(--navy);border-radius:26px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.25);max-width:500px;margin-left:auto}
-.panelHeader{display:flex;align-items:center;gap:8px;border-bottom:1px solid #e5eef7;padding-bottom:14px}
-.dot{width:10px;height:10px;border-radius:50%}
-.red{background:#ff5f57}.yellow{background:#ffbd2e}.green{background:#28c840}
-.panelHeader small{margin-left:auto;color:#60758a;font-weight:800}
-.logoStage{display:grid;place-items:center;padding:30px 0}
-.logoStage img{width:165px;max-width:70%;background:white;border-radius:20px}
-.statusList{display:grid;gap:12px}
-.statusList p{display:flex;align-items:center;gap:12px;margin:0;background:#f0f8ff;color:#243b53;border-radius:16px;padding:14px;font-weight:800}
-.statusList svg{color:var(--blue);flex:none}
+.imageVisual{background:white;border:1px solid var(--line);border-radius:24px;padding:14px;box-shadow:0 26px 60px rgba(7,31,56,.15);animation:softFloat 5s ease-in-out infinite;overflow:hidden}
+.imageVisual img{display:block;width:100%;height:auto;border-radius:18px}
+.contactVisual{display:flex;justify-content:flex-end}
+.contactFlowCard,.workflowCard{background:white;border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 26px 60px rgba(7,31,56,.15);animation:softFloat 5s ease-in-out infinite}
+.contactFlowCard h3,.workflowCard h3{font-size:28px;margin:0 0 24px;color:var(--navy)}
+.contactFlowCard p,.workflowStep{display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:center;padding:16px 0;border-top:1px solid #e5eef7;margin:0;color:var(--muted);font-weight:800}
+.contactFlowCard span,.workflowStep span{width:42px;height:42px;border-radius:14px;background:#e8f7fd;color:var(--blue);display:grid;place-items:center;font-weight:900}
+.workflowStep p{margin:0;color:var(--muted);line-height:1.55;font-weight:700}
 
-.section,.page{padding:76px 24px}
-.sectionHead{max-width:820px;margin-bottom:34px}
-.sectionHead h2,.darkBand h2,.ctaBox h2{font-size:clamp(32px,4vw,46px);line-height:1.13;margin:10px 0 18px;color:var(--navy)}
-.sectionHead p{color:#52677a;line-height:1.75;font-size:17px}
+.revealUp{animation:fadeUp .7s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.sectionBlock{padding:82px 0}
+.sectionIntro{max-width:760px;margin-bottom:34px}
+.sectionIntro h2,.whySection h2,.workspaceCopy h2,.aboutWorkSection h2{font-size:clamp(34px,3vw,46px);line-height:1.15;margin:0 0 14px;color:var(--navy)}
+.sectionIntro p,.whySection p,.workspaceCopy p,.pageLead,.aboutWorkSection p{color:var(--muted);font-size:17px;line-height:1.75;margin:0}
+.serviceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.serviceCard{background:white;border:1px solid var(--line);border-radius:16px;padding:28px;min-height:285px;box-shadow:0 12px 30px rgba(7,31,56,.06);transition:.22s ease;animation:fadeUp .6s ease both}
+.serviceCard:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(7,31,56,.1)}
+.serviceIcon{width:52px;height:52px;background:#e8f7fd;color:var(--blue);border-radius:14px;display:grid;place-items:center;margin-bottom:20px}
+.serviceIcon svg{width:28px;height:28px}
+.serviceCard h3{font-size:21px;margin:0 0 12px;color:var(--navy)}
+.serviceCard p{color:var(--muted);line-height:1.68;margin:0;font-size:15px}
 
-.serviceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
-.serviceCard{background:white;border-radius:24px;padding:24px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;min-height:390px}
-.serviceTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.iconBubble{width:56px;height:56px;border-radius:18px;background:#eaf8ff;display:grid;place-items:center;border:1px solid #c9eefc;flex:none}
-.iconBubble svg{color:var(--blue);width:29px;height:29px}
-.badge{font-size:11px;font-weight:900;color:#0077aa;background:#eaf8ff;border:1px solid #c9eefc;padding:7px 9px;border-radius:999px;white-space:nowrap}
-.serviceBody{min-height:165px}
-.serviceCard h3{font-size:20px;line-height:1.25;color:var(--navy);margin:22px 0 12px}
-.serviceCard p{color:#415a77;line-height:1.62;margin:0;font-size:15px}
-.serviceCard ul{margin:auto 0 0;padding:16px 0 0;list-style:none;display:grid;gap:9px;border-top:1px solid #e8f1f8}
-.serviceCard li{display:flex;gap:9px;align-items:flex-start;color:#243b53;line-height:1.42;font-weight:800;font-size:14px}
-.serviceCard li svg{color:var(--blue);flex:none;margin-top:2px}
+.whySection{background:white;padding:76px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.whyGrid{display:grid;grid-template-columns:1fr .82fr;gap:54px;align-items:center}
+.checkRow{display:grid;gap:12px;margin-top:26px}
+.checkRow span{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:800}
+.checkRow svg{color:var(--blue)}
+.statsCard{background:var(--navy);color:white;border-radius:18px;padding:34px}
+.statsCard h3{font-size:26px;margin:0 0 14px}
+.statsCard p{color:#dcebf6}
+.statsGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+.statsGrid div{background:rgba(255,255,255,.08);border-radius:12px;padding:16px}
+.statsGrid strong{display:block;font-size:28px}
+.statsGrid span{font-size:13px;color:#dcebf6}
 
-.darkBand{background:linear-gradient(135deg,#06172d,#0b3159);color:white;padding:80px 0}
-.darkBand h2{color:white}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.split p{color:#e8f6ff;line-height:1.75;font-size:17px}
-.ticks{display:grid;gap:14px}
-.ticks p{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);padding:18px;border-radius:18px;display:flex;gap:12px;align-items:center;color:white;margin:0;font-weight:800}
+.globalPresence{padding:92px 0;background:radial-gradient(circle at top left,#ffffff 0%,transparent 34%),linear-gradient(135deg,#f6fbff 0%,#dcecff 100%);border-top:1px solid rgba(29,127,232,.14);border-bottom:1px solid rgba(29,127,232,.14);overflow:hidden}
+.presenceLayout{display:grid;grid-template-columns:.88fr 1.12fr;gap:48px;align-items:center}
+.presencePill{display:inline-flex;align-items:center;background:rgba(29,127,232,.1);border:1px solid rgba(29,127,232,.22);color:var(--blue);border-radius:999px;padding:10px 18px;font-size:14px;font-weight:900;margin-bottom:20px}
+.presenceCopy h2{font-size:clamp(36px,4vw,58px);line-height:1.08;color:var(--navy);margin:0 0 22px}
+.presenceCopy p{font-size:18px;line-height:1.75;color:var(--muted);margin:0 0 28px}
+.presenceFeatures{display:grid;gap:14px}
+.presenceFeatures div{background:white;border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:0 14px 34px rgba(7,31,56,.07);transition:.25s ease}
+.presenceFeatures div:hover{transform:translateX(6px)}
+.presenceFeatures strong{display:block;color:var(--navy);font-size:18px;margin-bottom:5px}
+.presenceFeatures span{color:var(--muted);font-size:15px}
+.presenceImageCard{background:white;border:1px solid rgba(29,127,232,.16);border-radius:30px;overflow:hidden;box-shadow:0 34px 80px rgba(7,31,56,.14);animation:softFloat 5s ease-in-out infinite}
+.presenceImageCard img{display:block;width:100%;height:auto;filter:saturate(.98) contrast(1.02)}
 
-.industryGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
-.industryGrid span{background:white;border:1px solid var(--line);border-radius:999px;text-align:center;padding:16px 12px;font-weight:900;color:var(--navy);box-shadow:0 8px 24px rgba(6,23,45,.07)}
+.workspaceSection{padding:82px 0;display:grid;grid-template-columns:.9fr 1.1fr;gap:58px;align-items:center}
+.deviceFrame{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 18px 45px rgba(7,31,56,.08)}
+.deviceHeader{height:22px;border-radius:999px;background:#e8f1f7;margin-bottom:24px}
+.deviceBody{height:240px;border-radius:14px;background:linear-gradient(135deg,#e8f7fd,#fff);display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:36px}
+.deviceBody svg{width:52px;height:52px;color:var(--blue);align-self:center;justify-self:center}
+.workspaceCopy .primaryBtn{margin-top:28px}
 
-.ctaSection{padding-bottom:76px}
-.ctaBox{background:linear-gradient(135deg,var(--blue),#095996);color:white;border-radius:28px;padding:42px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:28px}
-.ctaBox h2{color:white;margin-bottom:0}
+.aboutWorkSection{padding:82px 0;display:grid;grid-template-columns:.95fr 1.05fr;gap:70px;align-items:center}
+.pillGrid{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.pillGrid span{background:rgba(29,127,232,.1);border:1px solid rgba(29,127,232,.25);border-radius:999px;padding:12px 18px;color:#154775;font-weight:900}
+.aboutCards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding-bottom:82px}
+.aboutCards div{background:white;border:1px solid var(--line);border-radius:16px;padding:26px}
+.aboutCards h3{color:var(--navy);font-size:22px;margin:0 0 12px}
+.aboutCards p{color:var(--muted);line-height:1.65;margin:0}
+.pageBlock{padding:82px 0}
+.pageBlock h1{color:var(--navy)}
 
-.aboutLead{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.aboutLead.expanded{margin-bottom:42px}
-.aboutHighlight{background:linear-gradient(135deg,#06172d,#0b3159);color:white;border-radius:30px;padding:42px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;margin:42px 0;box-shadow:0 22px 60px rgba(6,23,45,.16)}
-.aboutHighlight h2{font-size:40px;line-height:1.15;margin:0 0 18px;color:white}
-.aboutHighlight p{color:#e8f6ff;line-height:1.8;font-size:17px}
-.highlightList{display:grid;gap:14px}
-.highlightList p{margin:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:16px;border-radius:18px;display:flex;gap:10px;align-items:flex-start;font-weight:800;line-height:1.45}
-.highlightList svg{color:var(--cyan);flex:none;margin-top:2px}
-.aboutGrid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:22px;margin-top:36px}
-.infoBox{background:white;padding:30px;border-radius:24px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column}
-.infoBox.large{grid-row:span 2}
-.infoBox h3{color:var(--navy);margin:0 0 12px;font-size:22px}
-.infoBox p{color:#415a77;line-height:1.75;margin:0 0 16px}
+.contactPage{animation:fadeUp .55s ease both}
+.contactHeader{max-width:760px;margin:0 0 38px;text-align:left}
+.contactHeader h1{text-align:left;margin-bottom:14px}
+.quoteLayout{display:grid;grid-template-columns:.95fr 1.05fr;gap:54px;align-items:start}
+.quoteForm{background:white;border:1px solid var(--line);border-radius:22px;padding:32px;box-shadow:0 16px 38px rgba(7,31,56,.07);text-align:left;animation:fadeUp .65s ease both}
+.quoteForm input,.quoteForm textarea,.quoteForm select{width:100%;border:1px solid #c8d7e3;border-radius:12px;padding:15px;font-size:15px;background:#f9fbff;transition:.2s ease}
+.quoteForm input:focus,.quoteForm textarea:focus,.quoteForm select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(29,127,232,.12);background:white}
+.formTwo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quoteForm select,.quoteForm textarea{margin-top:14px}
+.quoteForm button{margin-top:14px}
+.quoteForm small{display:block;color:var(--muted);margin-top:12px}
+.contactSideGraphic{display:grid;gap:20px}
+.contactProcessBox{background:white;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 18px 45px rgba(7,31,56,.08)}
+.contactProcessBox h3{font-size:28px;margin:0 0 18px;color:var(--navy)}
+.contactProcessBox p{margin:12px 0;color:var(--muted);font-weight:800;display:flex;align-items:center;gap:12px}
+.contactProcessBox span{width:34px;height:34px;border-radius:50%;background:#e8f7fd;color:var(--blue);display:grid;place-items:center;font-weight:900;flex:none}
+.miniContactCards{display:grid;gap:12px}
+.miniContactCards p{margin:0;background:white;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;gap:12px;align-items:center;color:var(--navy);font-weight:900}
+.miniContactCards svg{color:var(--blue)}
 
-.contactGrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:start}
-.contactDetails{background:white;border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow);margin-top:24px}
-.contactDetails p{display:flex;align-items:center;gap:12px;font-weight:900;color:#243b53}
-.contactDetails svg{color:var(--blue);flex:none}
-.form{background:white;padding:34px;border-radius:26px;box-shadow:var(--shadow);border:1px solid var(--line)}
-.form label{display:block;font-weight:900;margin-bottom:16px;color:var(--navy)}
-.form input,.form textarea,.form select{width:100%;margin-top:8px;padding:15px;border:1px solid #b7c9d9;border-radius:14px;font-size:15px;color:#102a43;background:#fbfdff}
-.form small{display:block;color:#627d98;margin-top:12px;line-height:1.5}
+.footer{background:var(--navy);color:white;padding:38px 0}
+.footerGrid{display:flex;justify-content:space-between;gap:30px}
+.footer h3{margin:0 0 8px}
+.footer p{margin:5px 0;color:#dcebf6}
 
-footer{background:#06172d;color:#e8f6ff;padding:35px 0}
-.footerGrid{display:flex;justify-content:space-between;gap:22px}
-footer strong{font-size:20px}
-footer p{margin:7px 0;color:#b6d7ec}
-
-@media(max-width:1100px){
-.serviceGrid{grid-template-columns:repeat(2,1fr)}
-.industryGrid{grid-template-columns:repeat(3,1fr)}
-.heroGrid{grid-template-columns:1fr}
-.heroPanel{margin-left:0;max-width:none}
+@media(max-width:950px){
+  .wrap{width:min(100% - 36px,1180px)}
+  .navLinks{display:none;position:absolute;left:24px;right:24px;top:102px;background:white;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.15);border-radius:14px;padding:14px;flex-direction:column;align-items:stretch}
+  .navLinks.open{display:flex}
+  .navLinks button{text-align:left;padding:14px}
+  .menuBtn{display:inline-flex}
+  .heroGrid,.whyGrid,.workspaceSection,.aboutWorkSection,.quoteLayout,.presenceLayout{grid-template-columns:1fr}
+  .heroSection{padding:64px 0 86px}
+  .serviceGrid,.aboutCards{grid-template-columns:1fr 1fr}
+  .workspaceSection{padding-top:58px}
+  .footerGrid{flex-direction:column}
+  .presenceImageCard{order:-1}
 }
 
-@media(max-width:860px){
-.wrap{padding:0 18px}
-.nav{height:76px}
-.brand img{width:50px;height:50px}
-.brand strong{font-size:18px}
-.brand span{font-size:10px}
-.ghostCall,.navCta{display:none}
-.menuBtn{display:inline-flex}
-.navLinks{display:none;position:absolute;left:18px;right:18px;top:82px;background:white;border-radius:22px;padding:12px;box-shadow:0 24px 60px rgba(0,0,0,.22);border:1px solid var(--line);flex-direction:column;align-items:stretch}
-.navLinks.open{display:flex}
-.navLinks button{color:var(--navy);text-align:left;padding:15px}
-.navLinks .active,.navLinks button:hover{background:#eaf8ff;color:var(--navy)}
-.hero{padding:64px 0 54px}
-.split,.contactGrid,.aboutLead,.aboutHighlight,.ctaBox{grid-template-columns:1fr}
-.actions{display:grid}
-.primary,.secondary{width:100%}
-.trustStrip{grid-template-columns:1fr}
-.serviceGrid,.aboutGrid{grid-template-columns:1fr}
-.serviceCard{min-height:auto}
-.serviceBody{min-height:auto}
-.industryGrid{grid-template-columns:1fr 1fr}
-.section,.page{padding:56px 18px}
-.aboutHighlight{padding:28px}
-.aboutHighlight h2{font-size:30px}
-.footerGrid{flex-direction:column}
-}
-
-@media(max-width:520px){
-.brand div{display:none}
-.industryGrid{grid-template-columns:1fr}
-.aboutTitle{font-size:38px}
-.sectionHead h2,.darkBand h2,.ctaBox h2{font-size:31px}
-.panelHeader small{display:none}
+@media(max-width:620px){
+  .wrap{width:min(100% - 32px,1180px)}
+  .navWrap{height:82px}
+  .brand img{width:58px;height:58px}
+  .brand span{font-size:16px}
+  .navLinks{top:82px}
+  .heroSection{padding:48px 0 78px}
+  .heroActions{display:grid}
+  .primaryBtn,.outlineBtn{width:100%}
+  .trustLine{display:grid;grid-template-columns:1fr;gap:10px}
+  .dashGrid{grid-template-columns:1fr}
+  .mainMetric{grid-row:auto;min-height:150px}
+  .serviceGrid,.aboutCards,.formTwo{grid-template-columns:1fr}
+  .statsGrid{grid-template-columns:1fr}
+  .workspaceSection,.sectionBlock,.pageBlock,.aboutWorkSection,.globalPresence{padding:54px 0}
+  .sectionIntro h2,.whySection h2,.workspaceCopy h2,.aboutWorkSection h2{font-size:32px}
+  .footerGrid{gap:16px}
 }
 `;
