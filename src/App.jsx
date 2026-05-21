@@ -183,7 +183,7 @@ function Home({ setPage }) {
         <div className="wrap heroGrid">
           <div className="heroCopy revealUp">
             <p className="kicker">Reliable IT Infrastructure & Support</p>
-            <h1>We deliver <span className="accent">modern IT solutions</span> for homes and growing teams.</h1>
+            <h1>We deliver <span className="accent">modern IT solutions</span> for businesses, homes and growing teams.</h1>
             <p className="heroText">
               Smart I.T Solutions provides onsite and remote IT services to keep your computers,
               networks, cloud tools, phones and security responsive, reliable and ready for growth.
